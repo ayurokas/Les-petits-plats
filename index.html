@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Les petits plats</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <script src="https://kit.fontawesome.com/9d010d1a2f.js" crossorigin="anonymous"
+    ></script>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header>
+      <img src="assets/logo_toque.jpg" alt="Logo Les petits plats" title="Les petits plats"/>
+      <h1>Les petits plats</h1>
+    </header>
+    <main>
+      <div id="search">
+        <form>
+          <input type="text" id="search_recipe" placeholder="Rechercher une recette, un ingrédient, un appareil ou un ustensile"/>
+          <span id="search_btn_recipe">
+            <i class="fas fa-search"></i>
+          </span>
+          <i class="search_btn_cross fas fa-times" aria-hidden="true"></i>
+        </form>
+        <div id="filters">
+          <div id="filters_tags"></div>
+          <div id="filters_buttons">
+            <div id="filter_ingredient" class="filter">
+              <button id="filter_btn_ingredient" class="filter_btn trigger">
+                <span class="filter_btn_option">Ingrédients</span>
+                <span class="filter_chevron_up"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <form id="filter_by_ingredient" class="filter_form">
+                <input type="text" id="input_ingredient" class="filter_input" data-property="ingredient" placeholder="Rechercher un ingrédient">
+                <span class="filter_close trigger"><i class="fa fa-chevron-up"></i></span>
+                <i id="filter_reset_ingredient" class="filter_reset fas fa-times" aria-hidden="true"></i>
+              </form>
+              <ul id="filter_list_ingredient" class="filter_list scrollbar"></ul>
+            </div>
+            <div id="filter_appliance" class="filter">
+              <button id="filter_btn_appliance" class="filter_btn trigger">
+                <span class="filter_btn_option">Appareils</span>
+                <span class="filter_chevron_up"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <form id="filter_by_appliance" class="filter_form">
+                <input type="text" id="input_appliance" class="filter_input" data-property="appliance" placeholder="Rechercher un appareil">
+                <span class="filter_close trigger"><i class="fa fa-chevron-up"></i></span>
+                <i id="filter_reset_appliance" class="filter_reset fas fa-times" aria-hidden="true"></i>
+              </form>
+              <ul id="filter_list_appliance" class="filter_list scrollbar"></ul>
+            </div>
+
+            <div id="filter_ustensil" class="filter">
+              <button id="filter_btn_ustensil" class="filter_btn trigger">
+                <span class="filter_btn_option">Ustensiles</span>
+                <span class="filter_chevron_up"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <form id="filter_by_ustensil" class="filter_form">
+                <input type="text" id="input_ustensil" class="filter_input" data-property="ustensil" placeholder="Rechercher un ustensile">
+                <span class="filter_close trigger"><i class="fa fa-chevron-up"></i></span>
+                <i id="filter_reset_ustensil" class="filter_reset fas fa-times" aria-hidden="true"></i>
+              </form>
+              <ul id="filter_list_ustensil" class="filter_list scrollbar"></ul>
+            </div>
+          </div>
+          <p class="search_recipe_length"><span class="search_recipe_number">50</span> recette(s) correspondante(s)</p>
+        </div>
+      </div>
+      <div id="recipes"></div>
+    </main>
+    <script type="module" src="scripts/index.js"></script>
+  </body>
+</html>

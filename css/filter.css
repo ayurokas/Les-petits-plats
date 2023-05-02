@@ -1,0 +1,193 @@
+#filters {
+  display: flex;
+  flex-direction: column;
+}
+
+#filters_buttons {
+  display: flex;
+  gap: 20px;
+}
+
+#filters_tags {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.filters_tags_active {
+  padding-top: 20px;
+}
+
+.filter_tag_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 37px;
+  border-radius: 5px;
+  padding: 0 10px;
+}
+
+.filter_tag_p {
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+}
+
+.fa-times-circle {
+  color: white;
+  padding-left: 13px;
+  cursor: pointer;
+}
+
+.filter {
+  padding-top: 20px;
+}
+
+.filter_btn {
+  width: 170px;
+  padding: 20px;
+  font-family: "Lato";
+  font-weight: bold;
+  font-size: 18px;
+  text-align: left;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.filter_btn,
+.filter_form {
+  color: white;
+  border-radius: 5px;
+}
+
+.filter_form {
+  display: none;
+  cursor: pointer;
+  z-index: 1;
+  position: relative;
+}
+
+#filter_btn_ingredient,
+#input_ingredient,
+#filter_list_ingredient,
+.color_tag_ingredient {
+  background-color: #3282f7;
+}
+
+#filter_btn_appliance,
+#input_appliance,
+#filter_list_appliance,
+.color_tag_appliance {
+  background-color: #68d9a4;
+}
+
+#filter_btn_ustensil,
+#input_ustensil,
+#filter_list_ustensil,
+.color_tag_ustensil {
+  background-color: #ed6454;
+}
+
+.filter_input {
+  width: 667px;
+  border: none;
+  border-radius: 5px;
+  padding: 20px;
+  color: white;
+  font-family: "Lato";
+  font-size: 18px;
+}
+
+.filter_input_active {
+  border-radius: 5px 5px 0 0;
+}
+
+.filter_input::placeholder {
+  color: #ffffffa6;
+  font-weight: bolder;
+}
+
+.filter_input:focus-visible {
+  outline: none;
+}
+
+.filter_reset {
+  display: none;
+  font-size: 20px;
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  color: #4b3d3da6;
+  cursor: pointer;
+}
+
+.filter_chevron_up {
+  position: absolute;
+  right: 15px;
+  top: 22px;
+}
+
+.filter_close {
+  position: absolute;
+  top: 22px;
+  right: 15px;
+}
+
+.filter_list{
+  display: none; 
+  grid-auto-flow: column; 
+  grid-template-rows: repeat(10, 1fr); 
+  gap: 10px 40px; 
+  position: absolute;
+  height: 397px;
+  width: 667px;
+  background: black;
+  padding: 0 16px 19px;
+  border-radius: 0 0 5px 5px;
+  overflow-x: scroll;
+  z-index: 99;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(255, 254, 254);
+  border-radius: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.562);
+  border-radius: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.795);
+}
+
+.filter_li {
+  color: white;
+  width: 180px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.filter_li:hover {
+  font-weight: bolder;
+  width: 155px;
+  overflow: visible; 
+  white-space: normal;  
+}
+
+.selected {
+ color: #ffffff80;
+ cursor: default ;
+}
+
+.selected:hover {
+  font-weight: normal;
+ }
