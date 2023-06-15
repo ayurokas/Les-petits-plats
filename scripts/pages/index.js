@@ -178,17 +178,18 @@ document.addEventListener('DOMContentLoaded', function () {
   const appareilArrow = document.getElementById('appareil-arrow');
   const ustensileArrow = document.getElementById('ustensile-arrow');
 
-  // Gestionnaire d'événement pour la saisie dans le champ de recherche
-  searchInput.addEventListener('keyup', function (event) {
-    const keyword = event.target.value.trim();
+ // Gestionnaire d'événement pour la saisie dans le champ de recherche
+searchInput.addEventListener('keyup', function (event) {
+  const keyword = event.target.value.trim();
 
-    if (keyword.length >= 3) {
-      const results = searchRecipes(keyword);
-      displayRecipes(results);
-    } else if (keyword.length < 3) {
-      displayRecipes(filteredRecipes);
-    }
-  });
+  if (keyword.length >= 3) {
+    const results = searchRecipes(keyword);
+    displayRecipes(results);
+  } else if (keyword.length < 3) {
+    filteredRecipes = recipes; // Réinitialisation des recettes filtrées
+    displayRecipes(filteredRecipes);
+  }
+});
 
   // Gestionnaire d'événement pour la saisie dans le champ d'ingrédient
   ingredientInput.addEventListener('keyup', function (event) {
