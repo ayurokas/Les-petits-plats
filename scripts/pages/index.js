@@ -1,15 +1,15 @@
+// La variable filteredRecipes est initialisée avec toutes les recettes au début
 let filteredRecipes = recipes;
 
-// Fonction pour récupérer tous les ingrédients
-function getAllIngredients() 
-{
+// Fonction pour obtenir tous les ingrédients
+function getAllIngredients() {
     const ingredients = filteredRecipes.map(recipe => recipe.ingredients.map(obj => obj.ingredient))
     const uniqueArray = [...new Set([...ingredients.flat()])];
 
     return uniqueArray
 }
 
-// Fonction pour récupérer tous les appareils
+// Fonction pour obtenir tous les appareils
 function getAllAppareils() {
     const appareils = filteredRecipes.map(recipe => recipe.appliance)
     const uniqueArray = [...new Set([...appareils])];
@@ -17,15 +17,15 @@ function getAllAppareils() {
     return uniqueArray
 }
 
-// Fonction pour récupérer tous les ustensiles
+// Fonction pour obtenir tous les ustensiles
 function getAllUstensiles() {
     const ustensiles = filteredRecipes.map(recipe => recipe.ustensils);
     const uniqueArray = [...new Set([...ustensiles.flat()])];
 
     return uniqueArray
 }
-//----------------------- FILTRE ---------------------------------------------------
-// Fonction pour créer les éléments de filtre
+
+// Fonction pour créer les éléments de filtre (ingrédients, appareils, ustensiles)
 function createFilterItems(id, items) {
     const dropdown = document.getElementById(`${id}-dropdown`)
     const filterItems = document.createElement("ul");
@@ -52,31 +52,35 @@ function createFilterItems(id, items) {
         filterItems.appendChild(li);
     })
 };
-//----------------------------------------------------------------------------------
 
-//----------------------- RECHERCHE -----------------------------------------------
-// Fonction pour effectuer une recherche de recettes en fonction d'un mot-clé
+// Fonction pour rechercher des recettes en fonction d'un mot-clé
 function searchRecipes(keyword) {
     keyword = keyword.toLowerCase().trim();
 
-    //Filtrer les recettes en fonction du mot-clé
-    const filteredArray = filteredRecipes.filter(recipe => {
+    const filteredArray = [];
+
+    for (let i = 0; i < filteredRecipes.length; i++) {
+        const recipe = filteredRecipes[i];
         const name = recipe.name.toLowerCase();
-        const ingredients = recipe.ingredients.map(i => i.ingredient.toLowerCase()).join(' ');
+
+        let ingredients = '';
+        for (let j = 0; j < recipe.ingredients.length; j++) {
+            ingredients += recipe.ingredients[j].ingredient.toLowerCase() + ' ';
+        }
+
         const description = recipe.description.toLowerCase();
-        return (
-            name.includes(keyword) ||
-            ingredients.includes(keyword) ||
-            description.includes(keyword)
-        );
-    });
+
+        if (name.includes(keyword) || ingredients.includes(keyword) || description.includes(keyword)) {
+            filteredArray.push(recipe);
+        }
+    }
 
     filteredRecipes = filteredArray;
 
     return filteredArray;
 }
 
-// Afficher les recettes filtrées
+// Fonction pour afficher les recettes
 function displayRecipes(recipes) {
     const recipesSection = document.querySelector('.recipes');
     const noRecipe = document.querySelector('.no-recipe');
@@ -93,7 +97,7 @@ function displayRecipes(recipes) {
         })
     }
 }
-// Fonction pour effectuer une recherche d'ingrédients en fonction d'un mot-clé
+
 function searchIngredients(keyword) {
     keyword = keyword.toLowerCase().trim();
     const ingredients = getAllIngredients();
@@ -102,8 +106,6 @@ function searchIngredients(keyword) {
 
     return filteredIngredients
 }
-
-// Fonction pour effectuer une recherche d'appareils en fonction d'un mot-clé
 
 function searchAppareils(keyword) {
     keyword = keyword.toLowerCase().trim();
@@ -114,7 +116,6 @@ function searchAppareils(keyword) {
     return filteredAppareils
 }
 
-// Fonction pour effectuer une recherche d'ustensiles en fonction d'un mot-clé
 function searchUstensiles(keyword) {
     keyword = keyword.toLowerCase().trim();
     const ustensiles = getAllUstensiles();
@@ -124,10 +125,6 @@ function searchUstensiles(keyword) {
     return filteredUstensiles
 }
 
-//------------------------------------------------------------------------------
-
-//----------------------- TAG---------------------------------------------------
-// Afficher un tag correspondant à un filtre sélectionné
 function displayTag(keyword, type) {
     const selectedFilters = document.querySelector('.selected-filters');
 
@@ -142,8 +139,8 @@ function displayTag(keyword, type) {
     tag.appendChild(xIcon);
     selectedFilters.appendChild(tag);
 }
-//-------------------------------------------------------------------------------
 
+// Événement DOMContentLoaded pour exécuter le code une fois que le document est prêt
 document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.querySelector('#search-input');
     const ingredientInput = document.getElementById('ingredient-input');
@@ -154,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const appareilArrow = document.getElementById('appareil-arrow');
     const ustensileArrow = document.getElementById('ustensile-arrow');
 
-
+    // Gestionnaire d'événement pour la saisie dans le champ de recherche
     searchInput.addEventListener('keyup', function (event) {
         const keyword = event.target.value.trim();
 
@@ -162,12 +159,11 @@ document.addEventListener('DOMContentLoaded', function () {
             const results = searchRecipes(keyword);
             displayRecipes(results);
         } else if (keyword.length < 3) {
-            filteredRecipes = recipes;
-            displayRecipes(recipes);
+            displayRecipes(filteredRecipes);
         }
     });
 
-    // Événement de recherche d'ingrédients
+    // Gestionnaire d'événement pour la saisie dans le champ d'ingrédient
     ingredientInput.addEventListener('keyup', function (event) {
         const keyword = event.target.value.trim();
 
@@ -179,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
-    // Événement de recherche d'appareils
+    // Gestionnaire d'événement pour la saisie dans le champ d'appareil
     appareilInput.addEventListener('keyup', function (event) {
         const keyword = event.target.value.trim();
 
@@ -191,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
-    // Événement de recherche d'ustensiles
+    // Gestionnaire d'événement pour la saisie dans le champ d'ustensile
     ustensileInput.addEventListener('keyup', function (event) {
         const keyword = event.target.value.trim();
 
@@ -203,21 +199,22 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
-   // Événement pour réinitialiser les filtres d'ingrédients
+    // Gestionnaire d'événement pour le clic sur la flèche d'ingrédient
     ingredientArrow.addEventListener('click', () => {
         createFilterItems("ingredient", getAllIngredients());
     })
 
-    // Événement pour réinitialiser les filtres d'appareils
+    // Gestionnaire d'événement pour le clic sur la flèche d'appareil
     appareilArrow.addEventListener('click', () => {
         createFilterItems("appareil", getAllAppareils());
     })
 
-    // Événement pour réinitialiser les filtres d'ustensiles
+    // Gestionnaire d'événement pour le clic sur la flèche d'ustensile
     ustensileArrow.addEventListener('click', () => {
         createFilterItems("ustensile", getAllUstensiles());
     })
 
+    // Gestionnaire d'événement pour le clic sur la croix de filtre sélectionné
     document.addEventListener('click', function (event) {
         if (event.target.matches('img.x-icon')) {
             var selectedFilter = event.target.closest('.selected-filter');
@@ -226,10 +223,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// Gestion de la suppression des tags
+// Événement DOMNodeRemoved pour réinitialiser les filtres si tous les filtres sélectionnés sont supprimés
 const selectedFilters = document.querySelector('.selected-filters');
 
-selectedFilters.addEventListener('DOMNodeRemoved', () => {                
+selectedFilters.addEventListener('DOMNodeRemoved', () => {
     if (selectedFilters.children.length === 1) {
         displayRecipes(recipes);
         filteredRecipes = recipes;
@@ -239,7 +236,6 @@ selectedFilters.addEventListener('DOMNodeRemoved', () => {
     }
 });
 
-// Initialisation de la page
 function init() {
     createFilterItems("ingredient", getAllIngredients());
     createFilterItems("appareil", getAllAppareils());
