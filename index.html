@@ -1,78 +1,64 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lato&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/4d8bb3e50e.js" crossorigin="anonymous"></script>
-  <link rel="icon" href="./assets/logo.svg" type="image/png" sizes="32x32" />
-  <link rel="stylesheet" href="css/style.css" />
-  <title>Les petits plats</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="index.css" rel="stylesheet" />
+    <title>Les petits plats</title>
 </head>
 <body>
-  <header>
-    <img src="assets/logo.svg" alt="Logo Les petits plats" />
-    <h1>Les petits plats</h1>
-  </header>
-  <main>
-    <div id="recherche_principale">
-      <form>
-        <input type="text" id="recherche_principale_input" placeholder="Rechercher une recette" />
-        <i class="fas fa-search"></i>
-      </form>
-    </div>
-    <div id="tags">
-      <ul id="liste_tags"></ul>
-    </div>
-    <div id="selections">
-      <button class="ingredients">
-        Ingredients <i class="fa-solid fa-chevron-down"></i>
-      </button>
-      <div class="liste ingredients">
-        <input type="text" class="input-filtre" data-type="ingred" placeholder="Rechercher un ingrédient" />
-        <i class="fa-solid fa-chevron-up close_dropdown"></i>
-        <ul id="liste_ingredients"></ul>
-      </div>
-
-      <button class="appareils">
-        Appareils <i class="fa-solid fa-chevron-down"></i>
-      </button>
-      <div class="liste appareils">
-        <input type="text" class="input-filtre" data-type="appareil" placeholder="Rechercher un appareil" />
-        <i class="fa-solid fa-chevron-up close_dropdown"></i>
-        <ul id="liste_appareils"></ul>
-      </div>
-
-      <button class="ustensils">
-        Ustensils <i class="fa-solid fa-chevron-down"></i>
-      </button>
-      <div class="liste ustensils">
-        <input type="text" class="input-filtre" data-type="ustensil" placeholder="Rechercher un ustensile" />
-        <i class="fa-solid fa-chevron-up close_dropdown"></i>
-        <ul id="liste_ustensils"></ul>
-      </div>
-    </div>
-
-    <div id="recipes"></div>
-    <div id="not-found">
-      <p>Aucune recette ne correspond à votre critère… vous pouvez
-        chercher « tarte aux pommes », « poisson », etc.</p>
-    </div>
-  </main>
-
-
-  <script src="/datas/recipes.js"></script>
-  <script src="scripts/factories/recipefactory.js"></script>
-  <script src="scripts/utils/function.js"></script>
-  <script src="scripts/utils/filter.js"></script>
-  <script src="scripts/utils/dropdown.js"></script>
-  <script src="scripts/utils/mainResearch.js"></script>
-  <script src="scripts/pages/index.js"></script>
-
+    <header>
+        <img src="./assets/logo.svg" alt="logo of les petits plats" />
+    </header>
+    <main id="main">
+        <section class="search">
+            <form class="search-bar">
+                <input type="text" placeholder="Rechercher une recette" id="search-input">
+                <img src="./assets/search_icon.svg" alt="magnifier icon" />
+            </form>
+            <div class="selected-filters">
+            </div>
+            <div class="filters">
+                <article class="filter" id="ingredient-filter">
+                    <div class="filter-btn">
+                        <input id="ingredient-input" type="text" placeholder="Ingrédient">
+                        <img class="arrow" id="ingredient-arrow" src="./assets/arrow_down.svg" alt="arrow down icon"
+                            onclick="openDropdown('ingredient')" />
+                    </div>
+                    <div class="dropdown" id="ingredient-dropdown">
+                    </div>
+                </article>
+                <article class="filter" id="appareil-filter">
+                    <div class="filter-btn">
+                        <input id="appareil-input" type="text" placeholder="Appareils">
+                        <img class="arrow" id="appareil-arrow" src="./assets/arrow_down.svg" alt="arrow down icon"
+                            onclick="openDropdown('appareil')" />
+                    </div>
+                    <div class="dropdown" id="appareil-dropdown">
+                    </div>
+                </article>
+                <article class="filter" id="ustensile-filter">
+                    <div class="filter-btn">
+                        <input id="ustensile-input" type="text" placeholder="Ustensiles">
+                        <img class="arrow" id="ustensile-arrow" src="./assets/arrow_down.svg" alt="arrow down icon"
+                            onclick="openDropdown('ustensile')" />
+                    </div>
+                    <div class="dropdown" id="ustensile-dropdown">
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section class="recipes">
+        </section>
+        <section class="no-recipe hidden">
+            Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.
+        </section>
+    </main>
+    <script src="./recipes.js"></script>
+    <script src="scripts/factory/recipe.js"></script>
+    <script src="scripts/pages/index.js"></script>
+    <script src="scripts/utils/dropdown.js"></script>
 </body>
 
 </html>
