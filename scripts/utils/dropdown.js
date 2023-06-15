@@ -1,14 +1,12 @@
-// Variable qui indique si le menu déroulant est ouvert ou fermé
 let isOpen = false;
 
-// Fonction pour ouvrir ou fermer le menu déroulant en fonction de l'état actuel
 function openDropdown(filter) {
     const dropDownMenu = document.getElementById(`${filter}-dropdown`);
     const inputEl = document.getElementById(`${filter}-input`);
     const filterContainer = document.getElementById(`${filter}-filter`);
     const arrowIcon = document.getElementById(`${filter}-arrow`);
     const allDropdownMenu = document.querySelectorAll('.dropdown');
-    // Si le menu déroulant est fermé, on l'ouvre
+
     if (!isOpen) {
         dropDownMenu.style.visibility = 'visible'
         inputEl.setAttribute('placeholder', getPlaceholder('visible', filter));
@@ -16,9 +14,7 @@ function openDropdown(filter) {
         filterContainer.style.width = '667px';
         arrowIcon.setAttribute('src', './assets/arrow_up.svg');
         isOpen = true;
-    } 
-        // Sinon, on le ferme
-    else {
+    } else {
         dropDownMenu.style.visibility = 'hidden'
         dropDownMenu.classList.toggle('show');
         inputEl.setAttribute('placeholder', getPlaceholder('hidden', filter));
@@ -30,7 +26,6 @@ function openDropdown(filter) {
     }
 }
 
-// Fonction pour obtenir le texte de l'attribut "placeholder" en fonction de la visibilité et du filtre
 function getPlaceholder(visibility, filter) {
     if (visibility === 'visible') {
         switch (filter) {
